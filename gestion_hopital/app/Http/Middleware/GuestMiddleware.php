@@ -20,10 +20,10 @@ class GuestMiddleware
             switch ($user->role) {
                 case 'admin':
                     return redirect()->route('admin.index');
-                case 'medecin':
-                    return redirect()->route('medecin.index');
+                case 'doctor':
+                    return redirect()->route('doctors.index');
                 case 'patient':
-                    return redirect()->route('patient.index');
+                    return redirect()->route('patients.index');
                 default:
                     return redirect('/'); // ou une page d’accueil générique
             }
