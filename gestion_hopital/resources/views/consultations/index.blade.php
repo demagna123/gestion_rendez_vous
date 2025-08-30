@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="médécins">
-        <h1>Liste des Médécins</h1>
+        <h1>Liste des consultations</h1>
 
-        <a href="{{ route('doctors.create') }}">
-            Ajouter un médécin
+        <a href="{{ route('consultations.create') }}">
+            Ajouter une consultation
         </a>
     </div>
 
@@ -18,31 +18,23 @@
     <table>
         <thead>
             <tr>
-                <th>Nom</th>
-                <th>Prénoms</th>
-                <th>Contact</th>
-                <th>Spécialité</th>
-                <th>Disponibilité</th>
-                <th>Patient</th>
-                <th>Consultation</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Note</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($doctors as $doctor)
+            @foreach ($consultations as $consultation)
                 <tr>
 
-                    <td>{{ $doctor->name }}</td>
-                    <td>{{ $doctor->surname }}</td>
-                    <td>{{ $doctor->contact }}</td>
-                    <td>{{ $doctor->spécialité }}</td>
-                    <td>{{ $doctor->disponibilité }}</td>
-                    <td>{{ $doctor->patient? $doctor->patient->name : 'Aucun patient.' }}</td>
-                    <td>{{ $doctor->consultation? $doctor->consultation->note : 'Aucun consultation.' }}</td>
-                    
+                    <td>{{ $consultation->date }}</td>
+                    <td>{{ $consultation->heure }}</td>
+                    <td>{{ $consultation->note }}</td>
+
                     <td>
-                        <a href="{{ route('doctors.show', $doctor->id) }}">Détails</a> |
-                        <a href="{{ route('doctors.edit', $doctor->id) }}">Modifier</a> |
-                        <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce médecin ?')">
+                        <a href="{{ route('consultations.show', $consultation->id) }}">Détails</a> |
+                        <a href="{{ route('consultations.edit', $consultation->id) }}">Modifier</a> |
+                        <form action="{{ route('consultations.destroy', $consultation->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer cette consultation ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Supprimer</button>

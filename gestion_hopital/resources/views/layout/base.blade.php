@@ -20,6 +20,14 @@
         <li>
             <a href="{{ route('base3')}}">Patient</a>
         </li>
+        <li>
+            <a href="{{ route('consultations.index')}}">Consultations</a>
+        </li>
+        <li>
+            <a href="{{ route('logout')}}">
+                Déconnexion
+            </a>
+        </li>
     </ul>
     @yield('content')
 </body>

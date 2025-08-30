@@ -23,7 +23,6 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|email',
             'password' => 'required|string|min:8',
-
         ];
     }
 
@@ -40,6 +39,7 @@ class LoginRequest extends FormRequest
                 'regex:/[a-z]/',     // au moins une minuscule
                 'regex:/[0-9]/',     // au moins un chiffre
                 'regex:/[@$!%*?&]/', // au moins un symbole
+                
             ],
 
         ];

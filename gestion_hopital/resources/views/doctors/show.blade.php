@@ -9,6 +9,8 @@
         <p><strong>Contact :</strong> {{ $doctor->contact }}</p>
         <p><strong>Spécialité :</strong> {{ $doctor->spécialité}}</p>
         <p><strong>Disponibilité :</strong> {{ $doctor->disponibilité }}</p>
+        <p><strong>Patient :</strong> {{ $doctor->patient? $doctor->patient->name : 'Aucun patient.'}}</p>
+        <p><strong>Consultation :</strong> {{ $doctor->consultation? $doctor->consultation->note : 'Aucun consultation.' }}</p>
 
         
         <a href="{{ route('doctors.index') }}">⬅ Retour à la liste</a>

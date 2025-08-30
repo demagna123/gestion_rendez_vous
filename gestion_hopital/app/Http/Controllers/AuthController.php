@@ -31,4 +31,11 @@ class AuthController extends Controller
             'email' => 'E-mail ou mot de passe invalide.',
         ])->withInput();
     }
+    
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
 }

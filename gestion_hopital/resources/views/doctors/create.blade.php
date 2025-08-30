@@ -26,6 +26,20 @@
             <label>Disponibilité :</label>
             <input type="date" name="disponibilité" required>
 
+            <label for="patient_id">Patients :</label>
+            <select name="patient_id" id="patient_id">
+                <option value="">Sélectionner un patient</option>
+                @foreach ($patients as $patient)
+                    <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                @endforeach
+            </select>
+            <label for="consultation_id">Consultation :</label>
+            <select name="consultation_id" id="consultation_id">
+                <option value=""></option>
+                @foreach ($consultations as $consultation)
+                    <option value="{{ $consultation->id }}">{{ $consultation->note }}</option>
+                @endforeach
+            </select>
             <button type="submit">Enregistrer</button>
         </form>
     </div>

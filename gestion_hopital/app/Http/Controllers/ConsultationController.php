@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultation;
+
 use Illuminate\Http\Request;
 
 class ConsultationController extends Controller
 {
-    /**
+/**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $consultations = Consultation::all();
+        return view('consultations.index', [
+            'consultations' => $consultations,
+        ]);
     }
 
     /**
@@ -19,7 +24,8 @@ class ConsultationController extends Controller
      */
     public function create()
     {
-        //
+        return view('consultations.create');
+        
     }
 
     /**
@@ -27,7 +33,20 @@ class ConsultationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'heure' => 'required',
+            'note' => 'required',
+
+        ]);
+        Consultation::create([
+            'date' => $request->date,
+            'heure' => $request->heure,
+            'note' => $request->note,
+            
+        ]);
+
+        return back()->with('success', "Consultation créée avec succès !");
     }
 
     /**
@@ -35,7 +54,10 @@ class ConsultationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $consultation = Consultation::find($id);
+        return view('consultations.show', [
+            'consultation' => $consultation,
+        ]);
     }
 
     /**
@@ -43,7 +65,10 @@ class ConsultationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $consultation = Consultation::find($id);
+        return view('consultations.edit', [
+            'consultation' => $consultation,
+        ]);
     }
 
     /**
@@ -51,7 +76,20 @@ class ConsultationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $request->validate([
+            'date' => 'required',
+            'heure' => 'required',
+            'note' => 'required',
+            
+        ]);
+        Consultation::find($id)->update([
+            'date' => $request->date,
+            'heure' => $request->heure,
+            'note' => $request->note,
+            
+        ]);
+        return back()->with('success', "Consultation ajoutée avec succès.");
+
     }
 
     /**
@@ -59,6 +97,7 @@ class ConsultationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Consultation::find($id)->delete();
+        return redirect()->route('consultations.index')->with('success', "Consultation supprimée avec succès.");
     }
 }

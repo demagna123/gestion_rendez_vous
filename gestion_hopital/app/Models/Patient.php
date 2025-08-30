@@ -10,8 +10,6 @@ class Patient extends Model
         'name',
         'surname',
         'contact',
-        'spécialité',
-        'disponibilité',
         
     ];
 }

@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consultation extends Model
 {
-    //
+    protected $fillable = [
+        'date',
+        'heure',
+        'note',
+        
+    ];
 }

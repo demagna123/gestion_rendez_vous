@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultation;
 use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -23,7 +25,12 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctors.create');
+        $patients = Patient::all();
+        $consultations = Consultation::all();
+        return view('doctors.create', [
+            'patients' => $patients,
+            'consultations' => $consultations,
+        ]);
         
     }
 
@@ -45,6 +52,9 @@ class DoctorController extends Controller
             'contact' => $request->contact,
             'spécialité' => $request->spécialité,
             'disponibilité' => $request->disponibilité,
+            'patient_id' => $request->patient_id,
+            'consultation_id' => $request->consultation_id,
+
             
         ]);
 
@@ -70,6 +80,8 @@ class DoctorController extends Controller
         $doctor = Doctor::find($id);
         return view('doctors.edit', [
             'doctor' => $doctor,
+            'patients' => Patient::all(),
+            'consultations' => Consultation::all(),
         ]);
     }
 
@@ -91,6 +103,9 @@ class DoctorController extends Controller
             'contact' => $request->contact,
             'spécialité' => $request->spécialité,
             'disponibilité' => $request->disponibilité,
+            'patient_id' => $request->patient_id,
+            'consultation_id' => $request->consultation_id,
+
             
         ]);
         return back()->with('success', "Médécin ajouté avec succès.");

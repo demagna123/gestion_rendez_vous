@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->time('heure');
+            $table->string('note');
             $table->timestamps();
         });
     }
