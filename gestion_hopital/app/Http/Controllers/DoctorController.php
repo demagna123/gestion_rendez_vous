@@ -14,10 +14,13 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        $patients = Patient::all();
         $doctors = Doctor::all();
         return view('doctors.index', [
             'doctors' => $doctors,
+            'patients' => $patients,
         ]);
+        
     }
 
     /**

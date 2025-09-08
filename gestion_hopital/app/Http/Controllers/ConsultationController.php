@@ -76,7 +76,7 @@ class ConsultationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-         $request->validate([
+        $request->validate([
             'date' => 'required',
             'heure' => 'required',
             'note' => 'required',

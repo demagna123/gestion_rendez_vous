@@ -11,21 +11,21 @@
         <li>
             <a href="{{ route('home')}}">Accueil</a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('base1')}}">Admin</a>
         </li>
         <li>
             <a href="{{ route('base2')}}">Médécins</a>
         </li>
         <li>
-            <a href="{{ route('base3')}}">Patient</a>
+            <a href="{{ route('')}}">Patient</a>
         </li>
         <li>
             <a href="{{ route('consultations.index')}}">Consultations</a>
-        </li>
+        </li> --}}
         <li>
-            <a href="{{ route('logout')}}">
-                Déconnexion
+            <a href="{{ route('login')}}">
+                Se connecter
             </a>
         </li>
     </ul>

@@ -1,6 +1,6 @@
-@extends('layout.base')
+@extends('layout.base1')
 
-@section('content')
+@section('content1')
     <div class="doctors">
         <h1>Ajouter un médécin</h1>
 

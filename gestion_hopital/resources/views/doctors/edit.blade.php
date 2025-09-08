@@ -1,6 +1,6 @@
-@extends('layout.base')
+@extends('layout.base1')
 
-@section('content')
+@section('content1')
     <div class="doctors">
         <h1>Ajouter un médécin</h1>
 
@@ -25,7 +25,7 @@
             <label>Spécialité :</label>
             <input type="text" name="spécialité" required>
 
-            <label>Disponibilité :</label>
+            <label>Disponibilité :</label>                
             <input type="date" name="disponibilité" required>
 
             <label for="patient_id">Patients :</label>

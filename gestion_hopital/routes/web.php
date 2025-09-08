@@ -24,14 +24,21 @@ Route::resource('consultations', ConsultationController::class);
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('admin', AdminController::class);
+    Route::resource('doctors', DoctorController::class);
+    Route::resource('patients', PatientController::class);
+
 });
 
 Route::middleware(['auth', 'role:doctor'])->group(function () {
-    Route::resource('doctors', DoctorController::class);
+    Route::resource('doctors', DoctorController::class)->except('create','edit');
+    Route::resource('patients', PatientController::class)->except('create','edit','delete');
+    Route::resource('consultations', ConsultationController::class)->except('create','edit',);
+
+
 });
 
 Route::middleware(['auth', 'role:patient'])->group(function () {
-    Route::resource('patients', PatientController::class);
+    Route::resource('patients', PatientController::class)->except('create','edit',);
 });
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

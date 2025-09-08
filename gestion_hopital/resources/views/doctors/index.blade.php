@@ -1,6 +1,6 @@
-@extends('layout.base')
+@extends('layout.base1')
 
-@section('content')
+@section('content1')
     <div class="médécins">
         <h1>Liste des Médécins</h1>
 
@@ -8,13 +8,13 @@
             Ajouter un médécin
         </a>
     </div>
-
+    
     @if ($message = Session::get('success'))
-        <p class="success">
-            {{ $message }}
-        </p>
+    <p class="success">
+        {{ $message }}
+    </p>
     @endif
-
+    
     <table>
         <thead>
             <tr>
@@ -29,20 +29,63 @@
         </thead>
         <tbody>
             @foreach ($doctors as $doctor)
+            <tr>
+                
+                <td>{{ $doctor->name }}</td>
+                <td>{{ $doctor->surname }}</td>
+                <td>{{ $doctor->contact }}</td>
+                <td>{{ $doctor->spécialité }}</td>
+                <td>{{ $doctor->disponibilité }}</td>
+                <td>{{ $doctor->patient? $doctor->patient->name : 'Aucun patient.' }}</td>
+                <td>{{ $doctor->consultation? $doctor->consultation->note : 'Aucun consultation.' }}</td>
+                
+                <td>
+                    <a href="{{ route('doctors.show', $doctor->id) }}">Détails</a> |
+                    <a href="{{ route('doctors.edit', $doctor->id) }}">Modifier</a> |
+                    <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce médecin ?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="médécins">
+        <h1>Liste des patients</h1>
+
+        <a href="{{ route('patients.create') }}">
+            Ajouter un patient
+        </a>
+    </div>
+
+    @if ($message = Session::get('success'))
+        <p class="success">
+            {{ $message }}
+        </p>
+    @endif
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nom</th>
+                <th>Prénoms</th>
+                <th>Contact</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($patients as $patient)
                 <tr>
 
-                    <td>{{ $doctor->name }}</td>
-                    <td>{{ $doctor->surname }}</td>
-                    <td>{{ $doctor->contact }}</td>
-                    <td>{{ $doctor->spécialité }}</td>
-                    <td>{{ $doctor->disponibilité }}</td>
-                    <td>{{ $doctor->patient? $doctor->patient->name : 'Aucun patient.' }}</td>
-                    <td>{{ $doctor->consultation? $doctor->consultation->note : 'Aucun consultation.' }}</td>
-                    
+                    <td>{{ $patient->name }}</td>
+                    <td>{{ $patient->surname }}</td>
+                    <td>{{ $patient->contact }}</td>
                     <td>
-                        <a href="{{ route('doctors.show', $doctor->id) }}">Détails</a> |
-                        <a href="{{ route('doctors.edit', $doctor->id) }}">Modifier</a> |
-                        <form action="{{ route('doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce médecin ?')">
+                        <a href="{{ route('patients.show', $patient->id) }}">Détails</a> |
+                        <a href="{{ route('patients.edit', $patient->id) }}">Modifier</a> |
+                        <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce patient ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Supprimer</button>
@@ -52,7 +95,6 @@
             @endforeach
         </tbody>
     </table>
-
     <style>
         h1 {
             color: #2c3e50;
