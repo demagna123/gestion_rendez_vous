@@ -6,6 +6,7 @@ use App\Models\Consultation;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
@@ -15,11 +16,9 @@ class DoctorController extends Controller
     public function index()
     {
         $patients = Patient::all();
-        $doctors = Doctor::all();
-        return view('doctors.index', [
-            'doctors' => $doctors,
-            'patients' => $patients,
-        ]);
+        $doctors = Auth::user()->role === 'admin' ? Doctor::all() : collect();
+        return view('doctors.index', compact('doctors', 'patients'));
+
         
     }
 
