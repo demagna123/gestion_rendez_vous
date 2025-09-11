@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -16,7 +17,9 @@ class MainController extends Controller
         return view('layout.base1');
     }
     public function base2(){
-        return view('layout.base2');
+        $patients = Patient::all(); // ou une requête plus spécifique
+        return view('layout.base2', compact('patients'));
+
     }
     public function base3(){
         return view('layout.base3');
