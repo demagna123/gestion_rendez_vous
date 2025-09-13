@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultation;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,6 @@ class MainController extends Controller
 
     }
     public function base3(){
-        return view('layout.base3');
-    }
+        $consultations = Consultation::all(); // ← récupère les données
+        return view('layout.base3', compact('consultations'));    }
 }

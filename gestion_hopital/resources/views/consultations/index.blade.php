@@ -3,10 +3,14 @@
 @section('content1')
     <div class="médécins">
         <h1>Liste des consultations</h1>
+        @auth
+            @if(auth()->user()->role === 'admin')
 
-            <a href="{{ route('consultations.create') }}">
-                Ajouter une consultation
-            </a>
+                <a href="{{ route('consultations.create') }}">
+                    Ajouter une consultation
+                </a>
+            @endif
+        @endauth
             
     </div>
 
@@ -34,15 +38,16 @@
                     <td>{{ $consultation->note }}</td>
                     <td>
                         <a href="{{ route('consultations.show', $consultation->id) }}">Détails</a> |
-                            
+                            @auth
+                                @if(auth()->user()->role === 'admin')
                                     <a href="{{ route('consultations.edit', $consultation->id) }}">Modifier</a> |
                                     <form action="{{ route('consultations.destroy', $consultation->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer cette consultation ?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit">Supprimer</button>
                                     </form>
-        
-                            
+                                @endif
+                            @endauth
                     </td>
                 </tr>
             @endforeach

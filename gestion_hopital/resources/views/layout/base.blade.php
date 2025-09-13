@@ -11,24 +11,45 @@
         <li>
             <a href="{{ route('home')}}">Accueil</a>
         </li>
-        {{-- <li>
-            <a href="{{ route('base1')}}">Admin</a>
-        </li>
-        <li>
-            <a href="{{ route('base2')}}">Médécins</a>
-        </li>
-        <li>
-            <a href="{{ route('')}}">Patient</a>
-        </li>
-        <li>
-            <a href="{{ route('consultations.index')}}">Consultations</a>
-        </li> --}}
         <li>
             <a href="{{ route('login')}}">
                 Se connecter
             </a>
         </li>
     </ul>
+    <style>
+        body, ul, li, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 10px 20px;
+            
+        }
+
+        li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        li a:hover {
+            color: #0056b3;
+        }
+    </style>
     @yield('content')
 </body>
 </html>

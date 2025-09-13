@@ -1,55 +1,66 @@
 @extends('layout.base1')
 
 @section('content1')
-    <div class="médécins">
-        <h1>Liste des patients</h1>
+    @auth   
+        @if(auth()->user()->role === 'admin')
+            <div class="médécins">
+                <h1>Liste des patients</h1>
 
-        <a href="{{ route('patients.create') }}">
-            Ajouter un patient
-        </a>
-    </div>
+                <a href="{{ route('patients.create') }}">
+                    Ajouter un patient
+                </a>
+                            
+            </div>
+                        
+            @if ($message = Session::get('success'))
+            <p class="success">
+                {{ $message }}
+            </p>
+            @endif
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Prénoms</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($patients as $patient)
+                    <tr>
+                        
+                        <td>{{ $patient->name }}</td>
+                        <td>{{ $patient->surname }}</td>
+                        <td>{{ $patient->contact }}</td>
+                        <td>
+                            <a href="{{ route('patients.show', $patient->id) }}">Détails</a> |
+                            @auth
+                            @if(auth()->user()->role === 'admin')
+                            <a href="{{ route('patients.edit', $patient->id) }}">Modifier</a> |
+                            <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce patient ?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Supprimer</button>
+                            </form>
+                            @endif
+                            @endauth
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
 
-    @if ($message = Session::get('success'))
-        <p class="success">
-            {{ $message }}
-        </p>
-    @endif
-
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nom</th>
-                <th>Prénoms</th>
-                <th>Contact</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($patients as $patient)
-                <tr>
-
-                    <td>{{ $patient->name }}</td>
-                    <td>{{ $patient->surname }}</td>
-                    <td>{{ $patient->contact }}</td>
-                    <td>
-                        <a href="{{ route('patients.show', $patient->id) }}">Détails</a> |
-                        <a href="{{ route('patients.edit', $patient->id) }}">Modifier</a> |
-                        <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Supprimer ce patient ?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Supprimer</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <style>
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+    @endauth
+        <h3>Pour gérer les consultations cliquez sur <a href="{{ route('base3')}}">Liste des Consultations </a></h3>
+        
+        <style>
+            h1 {
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
 
         .médécins {
             margin-left: 150px;
@@ -122,6 +133,11 @@
 
         form button:hover {
             background-color: #c82333;
+        }
+        h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
         }
     </style>
 @endsection
