@@ -59,7 +59,7 @@
         @endif
     @endauth
     
-    <h3>Pour gérer les patients cliquez sur <a href="{{ route('base2')}}">Liste des Patients </a></h3>
+    <h3><a href="{{ route('base2')}}">Gérer les Patients </a></h3>
     <style>
         h1 {
             color: #2c3e50;

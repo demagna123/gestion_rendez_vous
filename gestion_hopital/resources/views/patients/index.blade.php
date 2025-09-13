@@ -54,7 +54,7 @@
         @endif
 
     @endauth
-        <h3>Pour gérer les consultations cliquez sur <a href="{{ route('base3')}}">Liste des Consultations </a></h3>
+        <h3><a href="{{ route('base3')}}">Gérer les Consultations </a></h3>
         
         <style>
             h1 {
